@@ -10,9 +10,7 @@ builder.Services.AddSwaggerGen();
 
 var config = builder.Configuration;
 
-var connectionString = config.GetConnectionString("database")
-    ?? throw new InvalidOperationException("Database connection string not found.");
-
+var connectionString = config.ConnectionString("database");
 
 builder.Services.AddApplication();
 builder.Services.AddDatabase(connectionString);
