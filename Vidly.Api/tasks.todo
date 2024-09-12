@@ -1,3 +1,4 @@
 ﻿// TODO: Add Health Check
 // TODO: Implement Serilog
-// TODO: Make Foreign Key required
+// TODO: GetPendingMigrationsAsync
+dotnet ef dbcontext optimize --output-dir Data/EntityModel

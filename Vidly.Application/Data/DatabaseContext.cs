@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-// using Vidly.Application.Data.EntityMapping;
+using Vidly.Application.Data.EntityModel;
 using Vidly.Application.Models;
 
 namespace Vidly.Application.Data;
@@ -24,5 +24,9 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 		
 		base.OnModelCreating(modelBuilder);
 	}
-	
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		optionsBuilder.UseModel(DatabaseContextModel.Instance);
+	}
 }

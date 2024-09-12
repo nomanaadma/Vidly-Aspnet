@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
+using Vidly.Application.Data.EntityModel;
 using Vidly.Application.Repositories;
 using Vidly.Application.Services;
 
@@ -20,12 +21,12 @@ public static class ApplicationServiceCollectionExtensions
 		string? connectionString)
 	{
 		services.AddDbContext<DatabaseContext>(optionBuilder =>
-		{
+		{ 
 			optionBuilder.UseNpgsql(connectionString);
 		});
 		
 		services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-		
+		services.AddSingleton<DbInitializer>();
 		return services;
 	}
 
