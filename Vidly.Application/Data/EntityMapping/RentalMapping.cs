@@ -8,15 +8,8 @@ public class RentalMapping : IEntityTypeConfiguration<Rental>
 {
 	public void Configure(EntityTypeBuilder<Rental> builder)
 	{
-		// builder.Property(rental => rental.Customer)
-			//.IsRequired();
-		
-		//
-		// builder.Property(rental => rental.Movie)
-		// 	.IsRequired();
-		
 		builder.Property(rental => rental.DateOut)
-			.HasDefaultValue(DateTime.Now.ToUniversalTime())
+			.HasDefaultValueSql("CURRENT_TIMESTAMP")
 			.IsRequired();
 		
 	}

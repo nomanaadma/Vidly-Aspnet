@@ -12,9 +12,6 @@ public class MovieMapping : IEntityTypeConfiguration<Movie>
 			.HasMaxLength(255)
 			.IsRequired();
 		
-		// builder.Property(movie => movie.Genre)
-		// 	.IsRequired();
-		
 		builder.Property(movie => movie.NumberInStock)
 			.HasMaxLength(255)
 			.IsRequired();
