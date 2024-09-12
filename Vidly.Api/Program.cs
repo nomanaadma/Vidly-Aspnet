@@ -1,7 +1,8 @@
 using Vidly.Application;
-using Vidly.Application.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,11 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", (DatabaseContext context) =>
-	{
-		return context.Database.CanConnect();
-	})
-	.WithName("index")
-	.WithOpenApi();
+app.MapControllers();
 
 app.Run();

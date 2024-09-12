@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
+using Vidly.Application.Repositories;
+using Vidly.Application.Services;
 
 namespace Vidly.Application;
 
@@ -9,6 +11,8 @@ public static class ApplicationServiceCollectionExtensions
 {
 	public static IServiceCollection AddApplication(this IServiceCollection services)
 	{
+		services.AddSingleton<IGenreRepository, GenreRepository>();
+		services.AddSingleton<IGenreService, GenreService>();
 		return services;
 	}
 	
@@ -19,6 +23,9 @@ public static class ApplicationServiceCollectionExtensions
 		{
 			optionBuilder.UseNpgsql(connectionString);
 		});
+		
+		services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
+		
 		return services;
 	}
 
