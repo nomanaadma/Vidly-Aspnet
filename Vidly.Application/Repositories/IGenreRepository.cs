@@ -4,5 +4,5 @@ namespace Vidly.Application.Repositories;
 
 public interface IGenreRepository
 {
-	Task<int> CreateAsync(Genre genre, CancellationToken token = default);
+	Task<Genre> CreateAsync(Genre genre, CancellationToken token = default);
 }

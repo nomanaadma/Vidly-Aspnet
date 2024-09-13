@@ -1,6 +1,6 @@
 ﻿namespace Vidly.Contracts.Requests;
 
-public class CreateGenreRequest
+public class GenreRequest
 {
 	public required string Name { get; init; }
 }

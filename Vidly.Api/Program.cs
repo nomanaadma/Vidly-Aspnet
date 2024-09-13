@@ -1,3 +1,4 @@
+using Vidly.Api.Middlewares;
 using Vidly.Application;
 using Vidly.Application.Data;
 
@@ -27,6 +28,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ValidationMiddleware>();
 
 app.MapControllers();
 

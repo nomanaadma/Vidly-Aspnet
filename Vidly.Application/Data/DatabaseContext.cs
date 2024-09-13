@@ -16,7 +16,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly(
-			Assembly.GetExecutingAssembly(), 
+			typeof(IApplicationMarker).Assembly, 
 			t => t.GetInterfaces().Any(i => 
 				i.IsGenericType &&
 				i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>))

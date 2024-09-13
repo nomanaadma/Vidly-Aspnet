@@ -1,4 +1,14 @@
 ﻿// TODO: Add Health Check
 // TODO: Implement Serilog
 // TODO: GetPendingMigrationsAsync
+// TODO: Add no tracking globally and see impact
+// TODO: Add Generic Repository
+// TODO: schema shows nullable true why? 
+
+https://www.youtube.com/watch?v=p2faw9DCSsY
+
 dotnet ef dbcontext optimize --output-dir Data/EntityModel
+
+
+
+

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
@@ -14,6 +15,7 @@ public static class ApplicationServiceCollectionExtensions
 	{
 		services.AddSingleton<IGenreRepository, GenreRepository>();
 		services.AddSingleton<IGenreService, GenreService>();
+		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		return services;
 	}
 	
