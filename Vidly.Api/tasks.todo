@@ -1,9 +1,10 @@
-﻿// TODO: Add Health Check
-// TODO: Implement Serilog
-// TODO: GetPendingMigrationsAsync
-// TODO: Add no tracking globally and see impact
-// TODO: Add Generic Repository
-// TODO: schema shows nullable true why? 
+﻿TODO: Add Health Check
+TODO: Implement Serilog
+TODO: GetPendingMigrationsAsync
+TODO: Add no tracking globally and see impact
+TODO: Add Generic Repository
+TODO: schema shows nullable true why? 
+TODO: check cancellation token by break points
 
 https://www.youtube.com/watch?v=p2faw9DCSsY
 

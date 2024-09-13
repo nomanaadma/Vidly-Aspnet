@@ -8,5 +8,11 @@ namespace Vidly.Api.Mappers;
 [Mapper]
 public static partial class ValidationMapper
 {
-	public static partial ValidationFailureResponse MapToResponse(ValidationException validationFailure);
+	private static partial ValidationResponse MapToResponse(ValidationFailure validationFailure);
+	public static ValidationFailureResponse MapToListResponse(
+		IEnumerable<ValidationFailure> validationFailure) => 
+		new() { Errors = validationFailure.Select(MapToResponse) };
+		
 }
+
+

@@ -7,6 +7,6 @@ public class DbInitializer(IDbConnectionFactory dbConnectionFactory)
 	public async Task InitializeAsync()
 	{
 		await using var context = dbConnectionFactory.Context();
-		await context.Genres.FirstOrDefaultAsync();
+		await context.Genres.FindAsync(1);
 	}
 }

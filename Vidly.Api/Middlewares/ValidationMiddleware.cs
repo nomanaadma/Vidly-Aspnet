@@ -15,7 +15,7 @@ public class ValidationMiddleware(RequestDelegate next)
 		{
 			context.Response.StatusCode = 400;
 			 
-			var validationFailureResponse = ValidationMapper.MapToResponse(ex);
+			var validationFailureResponse = ValidationMapper.MapToListResponse(ex.Errors);
 			
 			await context.Response.WriteAsJsonAsync(validationFailureResponse);
 		}
