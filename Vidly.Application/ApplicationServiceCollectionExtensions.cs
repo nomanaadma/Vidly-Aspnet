@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
-using Vidly.Application.Data.EntityModel;
 using Vidly.Application.Repositories;
-using Vidly.Application.Services;
 
 namespace Vidly.Application;
 
@@ -14,7 +12,6 @@ public static class ApplicationServiceCollectionExtensions
 	public static IServiceCollection AddApplication(this IServiceCollection services)
 	{
 		services.AddSingleton<IGenreRepository, GenreRepository>();
-		services.AddSingleton<IGenreService, GenreService>();
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		return services;
 	}
