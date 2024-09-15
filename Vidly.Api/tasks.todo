@@ -5,6 +5,7 @@ TODO: Add no tracking globally and see impact
 TODO: Add Generic Repository
 TODO: schema shows nullable true why? 
 TODO: check cancellation token by break points
+TODO: Log each http request like morgan tiny in nodejs
 
 https://www.youtube.com/watch?v=p2faw9DCSsY
 

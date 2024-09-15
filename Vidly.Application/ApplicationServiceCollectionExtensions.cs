@@ -12,6 +12,7 @@ public static class ApplicationServiceCollectionExtensions
 	public static IServiceCollection AddApplication(this IServiceCollection services)
 	{
 		services.AddSingleton<IGenreRepository, GenreRepository>();
+		services.AddSingleton<ICustomerRepository, CustomerRepository>();
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		return services;
 	}
