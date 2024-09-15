@@ -38,4 +38,22 @@ public static class ApiEndpoints
 		public const string Delete = BaseWithId;
 
 	}
+	
+	public static class Movie
+	{
+		private const string Base = $"{ApiBase}/movies";
+		
+		public const string Create = Base;
+		
+		public const string GetAll = Base;
+		
+		private const string BaseWithId = $"{Base}/{{id}}";
+		
+		public const string Get = BaseWithId;
+		
+		public const string Update = BaseWithId;
+		
+		public const string Delete = BaseWithId;
+
+	}
 }

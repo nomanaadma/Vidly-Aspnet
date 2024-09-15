@@ -13,6 +13,7 @@ public static class ApplicationServiceCollectionExtensions
 	{
 		services.AddSingleton<IGenreRepository, GenreRepository>();
 		services.AddSingleton<ICustomerRepository, CustomerRepository>();
+		services.AddSingleton<IMovieRepository, MovieRepository>();
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		return services;
 	}
@@ -21,7 +22,7 @@ public static class ApplicationServiceCollectionExtensions
 		string? connectionString)
 	{
 		services.AddDbContext<DatabaseContext>(optionBuilder =>
-		{ 
+		{
 			optionBuilder.UseNpgsql(connectionString);
 		});
 		

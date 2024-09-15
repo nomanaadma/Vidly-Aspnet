@@ -7,17 +7,13 @@ public class CustomerValidator : AbstractValidator<Customer>
 {
 	public CustomerValidator()
 	{
-		RuleFor(g => g.Name)
+		RuleFor(c => c.Name)
 			.Length(5, 50)
 			.NotEmpty();
 		
-		RuleFor(g => g.Phone)
+		RuleFor(c => c.Phone)
 			.Length(5, 50)
 			.NotEmpty();
-		
-		// RuleFor(g => g.IsGold)
-		// 	.Must(x => x is false or true)
-		// 	.NotEmpty();
 		
 	}
 }

@@ -27,6 +27,9 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		optionsBuilder.UseModel(DatabaseContextModel.Instance);
+		optionsBuilder
+			.UseModel(DatabaseContextModel.Instance)
+			.EnableSensitiveDataLogging()
+			.LogTo(Console.WriteLine);
 	}
 }

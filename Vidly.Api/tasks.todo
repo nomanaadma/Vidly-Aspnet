@@ -6,6 +6,11 @@ TODO: Add Generic Repository
 TODO: schema shows nullable true why? 
 TODO: check cancellation token by break points
 TODO: Log each http request like morgan tiny in nodejs
+TODO: In the db connection factory check if the scope is created do not create it again
+TODO: replace problem details error with our validation failure
+TODO: do we really need to include required in movierequest or any request since we are validating the result with the fluent validation? 
+
+
 
 https://www.youtube.com/watch?v=p2faw9DCSsY
 

@@ -76,6 +76,8 @@ namespace Vidly.Application.Data.EntityModel
             var genreId = runtimeEntityType.AddProperty(
                 "GenreId",
                 typeof(int),
+                propertyInfo: typeof(Movie).GetProperty("GenreId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Movie).GetField("<GenreId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 sentinel: 0);
             genreId.TypeMapping = IntTypeMapping.Default.Clone(
                 comparer: new ValueComparer<int>(
