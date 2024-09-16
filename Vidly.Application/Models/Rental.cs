@@ -12,7 +12,7 @@ public class Rental
 
 	public DateTime DateOut { get; init; }
 	
-	public DateTime? DateReturned { get; init; }
+	public DateTime? DateReturned { get; set; }
 	
 	public int RentalFee { get; set; }
 

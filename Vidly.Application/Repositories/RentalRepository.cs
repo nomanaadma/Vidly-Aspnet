@@ -9,7 +9,8 @@ public class RentalRepository(
 	IDbConnectionFactory dbConnectionFactory,
 	IMovieRepository movieRepository,
 	ICustomerRepository customerRepository,
-	IValidator<Rental> rentalValidator) 
+	IValidator<Rental> rentalValidator
+	) 
 	: IRentalRepository
 {
 	public async Task<Rental> CreateAsync(Rental rental, CancellationToken token = default)
@@ -56,5 +57,13 @@ public class RentalRepository(
 			.OrderByDescending(r => r.DateOut).ToListAsync(token);
 		return rentals;
 	}
-	
+
+	public async Task<Rental?> FindByReturnAsync(Return rentalReturn, CancellationToken token = default)
+	{
+		await using var context = dbConnectionFactory.Context();
+		var rental = await context.Rentals.FirstOrDefaultAsync(
+			r => r.CustomerId == rentalReturn.CustomerId && r.MovieId == rentalReturn.MovieId, 
+			token);
+		return rental;
+	}
 }

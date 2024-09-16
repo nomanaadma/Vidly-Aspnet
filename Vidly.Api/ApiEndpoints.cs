@@ -74,4 +74,12 @@ public static class ApiEndpoints
 		public const string Delete = BaseWithId;
 
 	}
+	
+	public static class Return
+	{
+		private const string Base = $"{ApiBase}/returns";
+		
+		public const string Create = Base;
+
+	}
 }
