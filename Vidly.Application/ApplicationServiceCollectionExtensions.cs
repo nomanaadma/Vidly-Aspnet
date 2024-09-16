@@ -14,7 +14,10 @@ public static class ApplicationServiceCollectionExtensions
 		services.AddSingleton<IGenreRepository, GenreRepository>();
 		services.AddSingleton<ICustomerRepository, CustomerRepository>();
 		services.AddSingleton<IMovieRepository, MovieRepository>();
+		services.AddSingleton<IRentalRepository, RentalRepository>();
+		
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
+		
 		return services;
 	}
 	

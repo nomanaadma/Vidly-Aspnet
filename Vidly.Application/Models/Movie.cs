@@ -8,7 +8,7 @@ public class Movie
 
 	public int GenreId { get; init; }
 	public Genre Genre { get; set; } = null!;
-	public int NumberInStock { get; init; }
+	public int NumberInStock { get; set; }
 
 	public int DailyRentalRate { get; init; }
 	

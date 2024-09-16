@@ -30,6 +30,13 @@ public class MovieRepository(
 		var movie = await context.Movies.Include(m => m.Genre).FirstOrDefaultAsync(m => m.Id == id, token);
 		return movie;
 	}
+	
+	public async Task<Movie?> FindByIdAsync(int id, CancellationToken token = default)
+	{
+		await using var context = dbConnectionFactory.Context();
+		var movie = await context.Movies.FindAsync([id], token);
+		return movie;
+	}
 
 	public async Task<IEnumerable<Movie>> GetAllAsync(CancellationToken token = default)
 	{

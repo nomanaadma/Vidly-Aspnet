@@ -2,16 +2,18 @@
 
 public class Rental
 {
-	public int Id { get; init; }
+	public int Id { get; set; }
 	
-	public Customer Customer { get; init; } = null!;
+	public int CustomerId { get; init; }
+	public Customer Customer { get; set; } = null!;
 
-	public Movie Movie { get; init; } = null!;
+	public int MovieId { get; init; }
+	public Movie Movie { get; set; } = null!;
 
 	public DateTime DateOut { get; init; }
 	
-	public DateTime DateReturned { get; init; }
+	public DateTime? DateReturned { get; init; }
 	
-	public int RentalFee { get; init; }
+	public int RentalFee { get; set; }
 
 }

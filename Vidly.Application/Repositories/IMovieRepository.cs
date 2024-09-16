@@ -8,6 +8,8 @@ public interface IMovieRepository
 	
 	Task<Movie?> GetByIdAsync(int id, CancellationToken token = default);
 	
+	Task<Movie?> FindByIdAsync(int id, CancellationToken token = default);
+	
 	Task<IEnumerable<Movie>> GetAllAsync(CancellationToken token = default);
 	
 	Task<Movie> UpdateAsync(Movie movie, CancellationToken token = default);

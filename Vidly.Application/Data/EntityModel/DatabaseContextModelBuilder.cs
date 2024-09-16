@@ -207,7 +207,10 @@ namespace Vidly.Application.Data.EntityModel
             vidlyApplicationModelsRentalTableBase.Columns.Add("CustomerId", customerIdColumnBase);
             var dateOutColumnBase = new ColumnBase<ColumnMappingBase>("DateOut", "timestamp with time zone", vidlyApplicationModelsRentalTableBase);
             vidlyApplicationModelsRentalTableBase.Columns.Add("DateOut", dateOutColumnBase);
-            var dateReturnedColumnBase = new ColumnBase<ColumnMappingBase>("DateReturned", "timestamp with time zone", vidlyApplicationModelsRentalTableBase);
+            var dateReturnedColumnBase = new ColumnBase<ColumnMappingBase>("DateReturned", "timestamp with time zone", vidlyApplicationModelsRentalTableBase)
+            {
+                IsNullable = true
+            };
             vidlyApplicationModelsRentalTableBase.Columns.Add("DateReturned", dateReturnedColumnBase);
             var idColumnBase2 = new ColumnBase<ColumnMappingBase>("Id", "integer", vidlyApplicationModelsRentalTableBase);
             vidlyApplicationModelsRentalTableBase.Columns.Add("Id", idColumnBase2);
@@ -236,7 +239,10 @@ namespace Vidly.Application.Data.EntityModel
             rentalsTable.Columns.Add("CustomerId", customerIdColumn);
             var dateOutColumn = new Column("DateOut", "timestamp with time zone", rentalsTable);
             rentalsTable.Columns.Add("DateOut", dateOutColumn);
-            var dateReturnedColumn = new Column("DateReturned", "timestamp with time zone", rentalsTable);
+            var dateReturnedColumn = new Column("DateReturned", "timestamp with time zone", rentalsTable)
+            {
+                IsNullable = true
+            };
             rentalsTable.Columns.Add("DateReturned", dateReturnedColumn);
             var movieIdColumn = new Column("MovieId", "integer", rentalsTable);
             rentalsTable.Columns.Add("MovieId", movieIdColumn);
