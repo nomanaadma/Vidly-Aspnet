@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
 using Vidly.Application.Repositories;
+using Vidly.Application.Services;
 
 namespace Vidly.Application;
 
@@ -16,6 +17,8 @@ public static class ApplicationServiceCollectionExtensions
 		services.AddSingleton<IMovieRepository, MovieRepository>();
 		services.AddSingleton<IRentalRepository, RentalRepository>();
 		services.AddSingleton<IReturnRepository, ReturnRepository>();
+		services.AddSingleton<IUserRepository, UserRepository>();
+		services.AddSingleton<IUserService, UserService>();
 		
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		

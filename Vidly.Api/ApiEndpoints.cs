@@ -82,4 +82,12 @@ public static class ApiEndpoints
 		public const string Create = Base;
 
 	}
+	
+	public static class User
+	{
+		private const string Base = $"{ApiBase}/users";
+		
+		public const string Create = Base;
+		
+	}
 }
