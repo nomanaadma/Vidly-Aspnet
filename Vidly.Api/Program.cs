@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<AuthFilter>();
+builder.Services.AddScoped<AdminFilter>();
 
 var config = builder.Configuration;
 

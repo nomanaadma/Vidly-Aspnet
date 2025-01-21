@@ -34,9 +34,9 @@ public class UserController(
 		
 	}
 	
-	
 	[HttpGet(ApiEndpoints.User.Me)]
 	[ServiceFilter(typeof(AuthFilter))]
+	[ServiceFilter(typeof(AdminFilter))]
 	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
 	public async Task<IActionResult> Me(CancellationToken token)
 	{
