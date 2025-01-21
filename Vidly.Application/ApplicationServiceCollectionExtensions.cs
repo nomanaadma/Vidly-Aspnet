@@ -10,7 +10,7 @@ namespace Vidly.Application;
 
 public static class ApplicationServiceCollectionExtensions
 {
-	public static IServiceCollection AddApplication(this IServiceCollection services)
+	public static IServiceCollection AddApplication(this IServiceCollection services, IConfigurationManager config)
 	{
 		services.AddSingleton<IGenreRepository, GenreRepository>();
 		services.AddSingleton<ICustomerRepository, CustomerRepository>();
@@ -19,6 +19,7 @@ public static class ApplicationServiceCollectionExtensions
 		services.AddSingleton<IReturnRepository, ReturnRepository>();
 		services.AddSingleton<IUserRepository, UserRepository>();
 		services.AddSingleton<IUserService, UserService>();
+		services.AddSingleton(config);
 		
 		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 		

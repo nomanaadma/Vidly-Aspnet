@@ -15,7 +15,7 @@ var config = builder.Configuration;
 
 var connectionString = config.ConnectionString("database");
 
-builder.Services.AddApplication();
+builder.Services.AddApplication(config);
 builder.Services.AddDatabase(connectionString);
 
 var app = builder.Build();

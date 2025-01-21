@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Vidly.Application.Models;
 using Vidly.Application.Repositories;
@@ -22,7 +23,8 @@ public interface IUserService
 public class UserService(
 	IUserRepository userRepository,
 	IValidator<User> userValidator,
-	IValidator<AuthRequest> authValidator
+	IValidator<AuthRequest> authValidator,
+	IConfigurationManager config
 	) : IUserService
 {
 	public async Task<User> CreateAsync(User user, CancellationToken token = default)
@@ -42,9 +44,9 @@ public class UserService(
 
 	public string GenerateAuthToken(User user)
 	{
-		const string tokenSecret =  "vidly_application_jwt_private_key";
+		
 		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(tokenSecret);
+		var key = Encoding.UTF8.GetBytes(config["JwtTokenSecret"]!);
 		
 		var claims = new List<Claim>
 		{
