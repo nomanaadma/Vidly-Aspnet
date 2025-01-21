@@ -5,6 +5,7 @@ using FluentValidation;
 using Microsoft.IdentityModel.Tokens;
 using Vidly.Application.Models;
 using Vidly.Application.Repositories;
+using Vidly.Contracts.Requests;
 using BC = BCrypt.Net.BCrypt;
 
 namespace Vidly.Application.Services;
@@ -12,13 +13,16 @@ namespace Vidly.Application.Services;
 public interface IUserService
 {
 	Task<User> CreateAsync(User user, CancellationToken token = default);
+
+	Task<string> GetAuthAsync(AuthRequest auth, CancellationToken token = default);
 	
 	string GenerateAuthToken(User user);
 }
 
 public class UserService(
 	IUserRepository userRepository,
-	IValidator<User> userValidator
+	IValidator<User> userValidator,
+	IValidator<AuthRequest> authValidator
 	) : IUserService
 {
 	public async Task<User> CreateAsync(User user, CancellationToken token = default)
@@ -27,10 +31,18 @@ public class UserService(
 		user.Password = BC.HashPassword(user.Password, 10);
 		return await userRepository.CreateAsync(user, token);
 	}
+	
+	public async Task<string> GetAuthAsync(AuthRequest auth, CancellationToken token = default)
+	{
+		await authValidator.ValidateAndThrowAsync(auth, token);
+		var user = await userRepository.GetByEmailAsync(auth.Email, token);
+		return GenerateAuthToken(user!);
+	}
+	
 
 	public string GenerateAuthToken(User user)
 	{
-		const string tokenSecret = "vidly_application_jwt_private_key";
+		const string tokenSecret =  "vidly_application_jwt_private_key";
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.UTF8.GetBytes(tokenSecret);
 		

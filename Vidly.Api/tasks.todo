@@ -8,12 +8,22 @@ TODO: check cancellation token by break points
 TODO: Log each http request like morgan tiny in nodejs
 TODO: In the db connection factory check if the scope is created do not create it again
 TODO: replace problem details error with our validation failure
-TODO: do we really need to include required in movierequest or any request since we are validating the result with the fluent validation? 
+TODO: do we really need to include required in movierequest or any request since we are validating the result with the fluent validation?
+TODO: get configuration builder fix and token secret from configuration 
+
+in the user public string Name { get; init; } = string.Empty; why string.Empty?
 
 https://www.youtube.com/watch?v=p2faw9DCSsY
 
 dotnet ef dbcontext optimize --output-dir Data/EntityModel
 
+
+{
+  "email": "nomanaadma@gmail.com",
+  "password": "123456",
+  "name": "noman",
+  "isAdmin": false
+}
 
 
 
