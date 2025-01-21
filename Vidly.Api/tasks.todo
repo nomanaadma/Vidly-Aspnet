@@ -8,7 +8,11 @@ TODO: check cancellation token by break points
 TODO: Log each http request like morgan tiny in nodejs
 TODO: In the db connection factory check if the scope is created do not create it again
 TODO: replace problem details error with our validation failure
-TODO: do we really need to include required in movierequest or any request since we are validating the result with the fluent validation? 
+TODO: do we really need to include required in movierequest or any request since we are validating the result with the fluent validation?
+TODO: instead of doing custom filter add authorization and authentication in the program 
+
+what is stringvalues data type? 
+ 
 
 in the user public string Name { get; init; } = string.Empty; why string.Empty?
 

@@ -11,6 +11,8 @@ public interface IUserRepository
 	Task<User> CreateAsync(User user, CancellationToken token = default);
 	
 	Task<User?> GetByEmailAsync(string email, CancellationToken token = default);
+
+	Task<User?> GetByIdAsync(int id, CancellationToken token = default);
 }
 
 public class UserRepository(IDbConnectionFactory dbConnectionFactory) : IUserRepository
@@ -27,6 +29,13 @@ public class UserRepository(IDbConnectionFactory dbConnectionFactory) : IUserRep
 	{
 		await using var context = dbConnectionFactory.Context();
 		var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email, token);
+		return user;
+	}
+	
+	public async Task<User?> GetByIdAsync(int id, CancellationToken token = default)
+	{
+		await using var context = dbConnectionFactory.Context();
+		var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id, token);
 		return user;
 	}
 }

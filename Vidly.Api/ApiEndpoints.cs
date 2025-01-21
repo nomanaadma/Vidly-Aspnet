@@ -89,6 +89,8 @@ public static class ApiEndpoints
 		
 		public const string Create = Base;
 		
+		public const string Me = $"{ApiBase}/me";
+		
 	}
 	
 	public const string Auth = $"{ApiBase}/auth";

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using Vidly.Api.Filters;
 using Vidly.Api.Mappers;
+using Vidly.Application.Repositories;
 using Vidly.Application.Services;
 using Vidly.Contracts.Requests;
 using Vidly.Contracts.Responses;
@@ -7,7 +10,10 @@ using Vidly.Contracts.Responses;
 namespace Vidly.Api.Controllers;
 
 [ApiController]
-public class UserController(IUserService userService) : ControllerBase
+public class UserController(
+	IUserRepository userRepository,
+	IUserService userService
+	) : ControllerBase
 {
 	
 	[HttpPost(ApiEndpoints.User.Create)]
@@ -23,6 +29,26 @@ public class UserController(IUserService userService) : ControllerBase
 		Response.Headers["x-auth-token"] = userService.GenerateAuthToken(user);
 		
 		var response = UserMapper.MapToResponse(user);
+		
+		return Ok(response);
+		
+	}
+	
+	
+	[HttpGet(ApiEndpoints.User.Me)]
+	[ServiceFilter(typeof(AuthFilter))]
+	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
+	public async Task<IActionResult> Me(CancellationToken token)
+	{
+		var jwt  = HttpContext.Items["user"]!.ToString();
+
+		var jsonObject = JObject.Parse( (jwt!.Split('.')[^1]) );
+
+		var userId = int.Parse(jsonObject["Id"]!.ToString());
+		
+		var user = await userRepository.GetByIdAsync(userId, token);
+		
+		var response = UserMapper.MapToResponse(user!);
 		
 		return Ok(response);
 		
