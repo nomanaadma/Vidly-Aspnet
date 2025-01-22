@@ -1,9 +1,17 @@
+using Serilog;
 using Vidly.Api.Filters;
 using Vidly.Api.Middlewares;
 using Vidly.Application;
 using Vidly.Application.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+builder.Host.UseSerilog((ctx, cf) =>
+{
+	cf.WriteTo.Console();
+});
+
 
 builder.Services.AddControllers();
 
@@ -23,6 +31,8 @@ builder.Services.AddApplication(config);
 builder.Services.AddDatabase(connectionString);
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
