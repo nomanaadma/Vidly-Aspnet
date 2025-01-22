@@ -6,7 +6,7 @@ using Vidly.Application.Models;
 namespace Vidly.Application.Repositories;
 
 public class RentalRepository(
-	IDbConnectionFactory dbConnectionFactory,
+	DatabaseContext context,
 	IMovieRepository movieRepository,
 	ICustomerRepository customerRepository,
 	IValidator<Rental> rentalValidator
@@ -17,8 +17,6 @@ public class RentalRepository(
 	{
 		await rentalValidator.ValidateAndThrowAsync(rental, token);
 		
-		await using var context = dbConnectionFactory.Context();
-
 		var movie = await movieRepository.FindByIdAsync(rental.MovieId, token);
 		
 		movie!.NumberInStock--;
@@ -39,7 +37,6 @@ public class RentalRepository(
 
 	public async Task<Rental?> GetByIdAsync(int id, CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var rental = await context.Rentals
 			.Include(r => r.Customer)
 			.Include(r => r.Movie)
@@ -50,7 +47,6 @@ public class RentalRepository(
 
 	public async Task<IEnumerable<Rental>> GetAllAsync(CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var rentals = await context.Rentals
 			.Include(r => r.Customer)
 			.Include(r => r.Movie)
@@ -60,7 +56,6 @@ public class RentalRepository(
 
 	public async Task<Rental?> FindByReturnAsync(Return rentalReturn, CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var rental = await context.Rentals.FirstOrDefaultAsync(
 			r => r.CustomerId == rentalReturn.CustomerId && r.MovieId == rentalReturn.MovieId, 
 			token);

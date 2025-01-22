@@ -47,8 +47,9 @@ app.UseMiddleware<ValidationMiddleware>();
 
 app.MapControllers();
 
-
-var dbInitializer = app.Services.GetRequiredService<DbInitializer>();
+var scope = app.Services.CreateScope();
+var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
 await dbInitializer.InitializeAsync();
 
 app.Run();
+

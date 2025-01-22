@@ -12,16 +12,16 @@ public static class ApplicationServiceCollectionExtensions
 {
 	public static IServiceCollection AddApplication(this IServiceCollection services, IConfigurationManager config)
 	{
-		services.AddSingleton<IGenreRepository, GenreRepository>();
-		services.AddSingleton<ICustomerRepository, CustomerRepository>();
-		services.AddSingleton<IMovieRepository, MovieRepository>();
-		services.AddSingleton<IRentalRepository, RentalRepository>();
-		services.AddSingleton<IReturnRepository, ReturnRepository>();
-		services.AddSingleton<IUserRepository, UserRepository>();
-		services.AddSingleton<IUserService, UserService>();
+		services.AddScoped<IGenreRepository, GenreRepository>();
+		services.AddScoped<ICustomerRepository, CustomerRepository>();
+		services.AddScoped<IMovieRepository, MovieRepository>();
+		services.AddScoped<IRentalRepository, RentalRepository>();
+		services.AddScoped<IReturnRepository, ReturnRepository>();
+		services.AddScoped<IUserRepository, UserRepository>();
+		services.AddScoped<IUserService, UserService>();
 		services.AddSingleton(config);
 		
-		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
+		services.AddValidatorsFromAssemblyContaining<IApplicationMarker>();
 		
 		return services;
 	}
@@ -34,8 +34,8 @@ public static class ApplicationServiceCollectionExtensions
 			optionBuilder.UseNpgsql(connectionString);
 		});
 		
-		services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-		services.AddSingleton<DbInitializer>();
+		services.AddScoped<DbInitializer>();
+		
 		return services;
 	}
 

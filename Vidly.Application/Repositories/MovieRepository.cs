@@ -6,7 +6,7 @@ using Vidly.Application.Models;
 namespace Vidly.Application.Repositories;
 
 public class MovieRepository(
-	IDbConnectionFactory dbConnectionFactory,
+	DatabaseContext context,
 	IGenreRepository genreRepository,
 	IValidator<Movie> movieValidator)
 	: IMovieRepository
@@ -14,7 +14,6 @@ public class MovieRepository(
 	public async Task<Movie> CreateAsync(Movie movie, CancellationToken token = default)
 	{
 		await movieValidator.ValidateAndThrowAsync(movie, token);
-		await using var context = dbConnectionFactory.Context();
 		await context.Movies.AddAsync(movie, token);
 		await context.SaveChangesAsync(token);
 		
@@ -26,21 +25,18 @@ public class MovieRepository(
 
 	public async Task<Movie?> GetByIdAsync(int id, CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var movie = await context.Movies.Include(m => m.Genre).FirstOrDefaultAsync(m => m.Id == id, token);
 		return movie;
 	}
 	
 	public async Task<Movie?> FindByIdAsync(int id, CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var movie = await context.Movies.FindAsync([id], token);
 		return movie;
 	}
 
 	public async Task<IEnumerable<Movie>> GetAllAsync(CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		var movies = await context.Movies
 			.Include(m => m.Genre)
 			.OrderBy(m => m.Title)
@@ -51,7 +47,6 @@ public class MovieRepository(
 	public async Task<Movie> UpdateAsync(Movie movie, CancellationToken token = default)
 	{
 		await movieValidator.ValidateAndThrowAsync(movie, token);
-		await using var context = dbConnectionFactory.Context();
 		context.Movies.Update(movie);
 		await context.SaveChangesAsync(token);
 		
@@ -63,7 +58,6 @@ public class MovieRepository(
 
 	public async Task DeleteByIdAsync(Movie movie, CancellationToken token = default)
 	{
-		await using var context = dbConnectionFactory.Context();
 		context.Movies.Remove(movie);
 		await context.SaveChangesAsync(token);
 	}

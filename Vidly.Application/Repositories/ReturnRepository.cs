@@ -10,7 +10,7 @@ public interface IReturnRepository
 }
 
 public class ReturnRepository(
-	IDbConnectionFactory dbConnectionFactory,
+	DatabaseContext context,
 	IMovieRepository movieRepository,
 	ICustomerRepository customerRepository,
 	IRentalRepository rentalRepository,
@@ -20,8 +20,6 @@ public class ReturnRepository(
 	public async Task<Rental?> ReturnAsync(Return rentalReturn, CancellationToken token = default)
 	{
 		await returnValidator.ValidateAndThrowAsync(rentalReturn, token);
-		
-		await using var context = dbConnectionFactory.Context();
 		
 		var movie = await movieRepository.FindByIdAsync(rentalReturn.MovieId, token);
 		
