@@ -1,6 +1,4 @@
-﻿TODO: Add Health Check
-TODO: replace problem details error with our validation failure
-TODO: instead of doing custom filter add authorization and authentication in the program
+﻿TODO: instead of doing custom filter add authorization and authentication in the program
 TODO: Add global exception handling
 
 
