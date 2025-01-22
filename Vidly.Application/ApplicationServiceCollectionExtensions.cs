@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly.Application.Data;
+using Vidly.Application.Models;
 using Vidly.Application.Repositories;
 using Vidly.Application.Services;
 
@@ -32,6 +33,7 @@ public static class ApplicationServiceCollectionExtensions
 		services.AddDbContext<DatabaseContext>(optionBuilder =>
 		{
 			optionBuilder.UseNpgsql(connectionString);
+			optionBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 		});
 		
 		services.AddScoped<DbInitializer>();

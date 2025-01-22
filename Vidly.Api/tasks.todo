@@ -1,9 +1,9 @@
 ﻿TODO: Add Health Check
-TODO: Add no tracking globally and see impact
-TODO: Add Generic Repository
 TODO: replace problem details error with our validation failure
 TODO: instead of doing custom filter add authorization and authentication in the program
 TODO: Add global exception handling
+
+
 
 in the user public string Name { get; init; } = string.Empty; why string.Empty?
 
@@ -14,12 +14,8 @@ dotnet ef dbcontext optimize --output-dir Data/EntityModel
 difference between """ interpolation and verbatim
 what's the stringValues type
 
-{
-  "email": "nomanaadma@gmail.com",
-  "password": "123456",
-  "name": "noman",
-  "isAdmin": false
-}
+practice of https://www.youtube.com/watch?v=W4vIgQKUc4g
+
 
 
 
