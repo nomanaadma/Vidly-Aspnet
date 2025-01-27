@@ -4,11 +4,11 @@ public class User
 {
 	public int Id { get; init; }
 	
-	public string Name { get; init; } = string.Empty;
+	public string Name { get; init; } = null!;
 	
-	public string Email { get; init; } = string.Empty;
+	public string Email { get; init; } = null!;
 	
-	public string Password { get; set; } = string.Empty;
+	public string Password { get; set; } = null!;
 
 	public bool IsAdmin { get; init; }
 	

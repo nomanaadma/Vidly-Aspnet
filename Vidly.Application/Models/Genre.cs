@@ -4,6 +4,6 @@ public class Genre
 {
 	public int Id { get; set; }
 
-	public string Name { get; init; } = string.Empty;
+	public string Name { get; init; } = null!;
 
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Vidly.Api.Filters;
 using Vidly.Api.Mappers;
@@ -35,22 +36,25 @@ public class UserController(
 	}
 	
 	[HttpGet(ApiEndpoints.User.Me)]
-	[ServiceFilter(typeof(AuthFilter))]
-	[ServiceFilter(typeof(AdminFilter))]
+	[Authorize("Admin")]
+	// [ServiceFilter(typeof(AuthFilter))]
+	// [ServiceFilter(typeof(AdminFilter))]
 	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
 	public async Task<IActionResult> Me(CancellationToken token)
 	{
-		var jwt  = HttpContext.Items["user"]!.ToString();
-
-		var jsonObject = JObject.Parse( (jwt!.Split('.')[^1]) );
-
-		var userId = int.Parse(jsonObject["Id"]!.ToString());
+		// var jwt  = HttpContext.Items["user"]!.ToString();
+		//
+		// var jsonObject = JObject.Parse( (jwt!.Split('.')[^1]) );
+		//
+		// var userId = int.Parse(jsonObject["Id"]!.ToString());
+		
+		var userId = int.Parse(HttpContext.User.FindFirst("Id")!.Value);
 		
 		var user = await userRepository.GetByIdAsync(userId, token);
 		
 		var response = UserMapper.MapToResponse(user!);
 		
 		return Ok(response);
-		
+
 	}
 }

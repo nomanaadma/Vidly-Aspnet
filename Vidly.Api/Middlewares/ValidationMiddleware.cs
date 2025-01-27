@@ -21,7 +21,7 @@ public class ValidationMiddleware(RequestDelegate next)
 			{
 				Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
 				Title = "One or more validation errors occurred.",
-				Status = StatusCodes.Status400BadRequest,
+				Status = context.Response.StatusCode,
 			};
 
 			foreach (var error in ex.Errors)

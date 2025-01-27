@@ -15,7 +15,8 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DatabaseCo
 			.AddJsonFile("appsettings.json")
 			.Build();
 
-		var connectionString = config.ConnectionString("database");
+		var connectionString = config.GetConnectionString("database") ??
+		                       throw new InvalidOperationException("Connection string 'database' not found.");
 			
 		optionsBuilder.UseNpgsql(connectionString);
 

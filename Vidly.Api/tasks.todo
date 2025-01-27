@@ -1,20 +1,5 @@
-﻿TODO: instead of doing custom filter add authorization and authentication in the program
-TODO: Add global exception handling
-TODO: if secret is not found then give error check in applicaitonservice collection extension
+﻿dotnet ef dbcontext optimize --output-dir Data/EntityModel
 
 
-
-in the user public string Name { get; init; } = string.Empty; why string.Empty?
-
-https://www.youtube.com/watch?v=p2faw9DCSsY
-
-dotnet ef dbcontext optimize --output-dir Data/EntityModel
-
-difference between """ interpolation and verbatim
-what's the stringValues type
-
-practice of https://www.youtube.com/watch?v=W4vIgQKUc4g
-
-
-
+https://localhost:7176/swagger/index.html
 

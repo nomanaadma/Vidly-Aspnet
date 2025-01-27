@@ -45,15 +45,5 @@ public static class ApplicationServiceCollectionExtensions
 		
 		return services;
 	}
-
-	public static string ConnectionString(this IConfigurationRoot configuration, string key)
-	{
-		var connectionString = configuration.GetConnectionString(key);
-		if (string.IsNullOrEmpty(connectionString))
-		{
-			throw new InvalidOperationException($"{key} connection string not found.");
-		}
-		return connectionString;
-	}
 	
 }
