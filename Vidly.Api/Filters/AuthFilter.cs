@@ -3,6 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
+using Vidly.Api.Helpers;
 using Vidly.Contracts.Responses;
 
 namespace Vidly.Api.Filters;
@@ -14,15 +15,18 @@ public class AuthFilter(IConfigurationManager config) : IAsyncActionFilter
 		if (!context.HttpContext.Request.Headers.TryGetValue("x-auth-token", out var token))
 		{
 
-			context.Result = new JsonResult(new ValidationResponse
+			var filterProblemDetails = new FilterValidationProblemDetails
 			{
-				PropertyName = "Auth Token",
-				ErrorMessage = "Token is required"	
-			})
-			{
-				StatusCode = StatusCodes.Status401Unauthorized
+				Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
+				Title = "Authentication Error",
+				Status = StatusCodes.Status401Unauthorized,
+				Instance = context.HttpContext.Request.Path
 			};
-
+			
+			filterProblemDetails.Errors.Add("Auth Token", ["Token is required"]);
+			
+			context.Result = filterProblemDetails.ObjectResult();
+			
 			return;
 		}
 		
@@ -49,15 +53,19 @@ public class AuthFilter(IConfigurationManager config) : IAsyncActionFilter
 		}
 		catch (Exception ex)
 		{
-			context.Result = new JsonResult(new ValidationResponse
+			
+			var filterProblemDetails = new FilterValidationProblemDetails
 			{
-				PropertyName = "Auth Token",
-				ErrorMessage = ex.Message	
-			})
-			{
-				StatusCode = StatusCodes.Status400BadRequest
+				Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+				Title = "Authentication Error",
+				Status = StatusCodes.Status400BadRequest,
+				Instance = context.HttpContext.Request.Path
 			};
-
+			
+			filterProblemDetails.Errors.Add("Auth Token", [ex.Message]);
+			
+			context.Result = filterProblemDetails.ObjectResult();
+			
 			return;
 		}
 		

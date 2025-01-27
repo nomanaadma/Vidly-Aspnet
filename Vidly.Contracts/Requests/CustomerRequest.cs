@@ -1,10 +1,15 @@
-﻿namespace Vidly.Contracts.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Vidly.Contracts.Requests;
 
 public class CustomerRequest
 {
-	public required string Name { get; init; }
+	[Required]
+	public string? Name { get; init; }
 	
-	public required string Phone { get; init; }
-	
-	public required bool IsGold { get; init; }
+	[Required]
+	public string? Phone { get; init; }
+
+	[Required]
+	public bool? IsGold { get; init; }
 }

@@ -11,7 +11,7 @@ public class RentalController(IRentalRepository rentalRepository) : ControllerBa
 {
 	[HttpPost(ApiEndpoints.Rental.Create)]
 	[ProducesResponseType(typeof(RentalResponse), StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]RentalRequest request,
 		CancellationToken token)
 	{

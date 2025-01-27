@@ -1,6 +1,9 @@
-﻿namespace Vidly.Contracts.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Vidly.Contracts.Requests;
 
 public class GenreRequest
 {
-	public required string Name { get; init; }
+	[Required]
+	public string? Name { get; init; }
 }

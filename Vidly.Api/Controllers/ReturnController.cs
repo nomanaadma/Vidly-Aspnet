@@ -11,7 +11,7 @@ public class ReturnController(IReturnRepository returnRepository) : ControllerBa
 {
 	[HttpPost(ApiEndpoints.Return.Create)]
 	[ProducesResponseType(typeof(RentalResponse), StatusCodes.Status200OK)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]ReturnRequest request,
 		CancellationToken token)
 	{

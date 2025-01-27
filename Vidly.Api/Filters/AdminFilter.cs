@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json.Linq;
-using Vidly.Contracts.Responses;
+using Vidly.Api.Helpers;
 
 namespace Vidly.Api.Filters;
 
@@ -17,15 +16,18 @@ public class AdminFilter : IAsyncActionFilter
 
 		if (!isAdmin)
 		{
-			context.Result = new JsonResult(new ValidationResponse
+			var filterProblemDetails = new FilterValidationProblemDetails
 			{
-				PropertyName = "User",
-				ErrorMessage = "Access Denied"
-			})
-			{
-				StatusCode = StatusCodes.Status400BadRequest
+				Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+				Title = "Authentication Error",
+				Status = StatusCodes.Status400BadRequest,
+				Instance = context.HttpContext.Request.Path
 			};
-
+			
+			filterProblemDetails.Errors.Add("User", ["Access Denied"]);
+			
+			context.Result = filterProblemDetails.ObjectResult();
+			
 			return;
 		}
 

@@ -11,7 +11,7 @@ public class GenreController(IGenreRepository genreRepository) : ControllerBase
 {
 	[HttpPost(ApiEndpoints.Genre.Create)]
 	[ProducesResponseType(typeof(GenreResponse), StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]GenreRequest request,
 		CancellationToken token)
 	{
@@ -52,7 +52,7 @@ public class GenreController(IGenreRepository genreRepository) : ControllerBase
 	
 	[HttpPut(ApiEndpoints.Genre.Update)]
 	[ProducesResponseType(typeof(GenreResponse), StatusCodes.Status200OK)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Update([FromRoute] int id, 
 		[FromBody] GenreRequest request, 

@@ -1,8 +1,12 @@
-﻿namespace Vidly.Contracts.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Vidly.Contracts.Requests;
 
 public class RentalRequest
 {
-	public required int CustomerId { get; init; }
+	[Required]
+	public int? CustomerId { get; init; }
 
-	public required int MovieId { get; init; }
+	[Required]
+	public int? MovieId { get; init; }
 }

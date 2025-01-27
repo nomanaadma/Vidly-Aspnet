@@ -11,7 +11,7 @@ public class MovieController(IMovieRepository movieRepository) : ControllerBase
 {
 	[HttpPost(ApiEndpoints.Movie.Create)]
 	[ProducesResponseType(typeof(MovieResponse), StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]MovieRequest request,
 		CancellationToken token)
 	{
@@ -52,7 +52,7 @@ public class MovieController(IMovieRepository movieRepository) : ControllerBase
 	
 	[HttpPut(ApiEndpoints.Movie.Update)]
 	[ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Update([FromRoute] int id, 
 		[FromBody] MovieRequest request, 

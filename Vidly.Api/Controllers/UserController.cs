@@ -18,7 +18,7 @@ public class UserController(
 	
 	[HttpPost(ApiEndpoints.User.Create)]
 	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]UserRequest request,
 		CancellationToken token)
 	{

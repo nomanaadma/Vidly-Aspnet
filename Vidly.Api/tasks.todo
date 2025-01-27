@@ -1,5 +1,6 @@
 ﻿TODO: instead of doing custom filter add authorization and authentication in the program
 TODO: Add global exception handling
+TODO: if secret is not found then give error check in applicaitonservice collection extension
 
 
 

@@ -10,7 +10,7 @@ public class AuthController(IUserService userService) : ControllerBase
 {
 	[HttpPost(ApiEndpoints.Auth)]
 	[ProducesResponseType(StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Auth([FromBody]AuthRequest request,
 		CancellationToken token)
 	{

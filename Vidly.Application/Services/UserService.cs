@@ -37,7 +37,7 @@ public class UserService(
 	public async Task<string> GetAuthAsync(AuthRequest auth, CancellationToken token = default)
 	{
 		await authValidator.ValidateAndThrowAsync(auth, token);
-		var user = await userRepository.GetByEmailAsync(auth.Email, token);
+		var user = await userRepository.GetByEmailAsync(auth.Email!, token);
 		return GenerateAuthToken(user!);
 	}
 	

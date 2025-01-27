@@ -1,8 +1,12 @@
-﻿namespace Vidly.Contracts.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Vidly.Contracts.Requests;
 
 public class AuthRequest
 {
-	public required string Email { get; init; }
+	[Required]
+	public string? Email { get; init; }
 	
-	public required string Password { get; init; }
+	[Required]
+	public string? Password { get; init; }
 }

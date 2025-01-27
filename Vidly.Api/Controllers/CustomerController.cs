@@ -11,7 +11,7 @@ public class CustomerController(ICustomerRepository customerRepository) : Contro
 {
 	[HttpPost(ApiEndpoints.Customer.Create)]
 	[ProducesResponseType(typeof(CustomerResponse), StatusCodes.Status201Created)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Create([FromBody]CustomerRequest request,
 		CancellationToken token)
 	{
@@ -52,7 +52,7 @@ public class CustomerController(ICustomerRepository customerRepository) : Contro
 	
 	[HttpPut(ApiEndpoints.Customer.Update)]
 	[ProducesResponseType(typeof(CustomerResponse), StatusCodes.Status200OK)]
-	[ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Update([FromRoute] int id, 
 		[FromBody] CustomerRequest request, 
