@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Vidly.Api.Filters;
+using Vidly.Api.Handlers;
 using Vidly.Api.Middlewares;
 using Vidly.Application;
 using Vidly.Application.Data;
@@ -25,8 +26,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<AuthFilter>();
-builder.Services.AddScoped<AdminFilter>();
+// builder.Services.AddScoped<AuthFilter>();
+// builder.Services.AddScoped<AdminFilter>();
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var config = builder.Configuration;
 
@@ -117,7 +121,10 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<GlobalExceptionMiddleware>();
+app.UseExceptionHandler();
+app.UseStatusCodePages();
+
+// app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<ValidationMiddleware>();
 
 app.MapControllers();
