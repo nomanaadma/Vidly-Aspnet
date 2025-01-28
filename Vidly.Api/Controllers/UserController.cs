@@ -39,7 +39,7 @@ public class UserController(
 	[Authorize("Admin")]
 	// [ServiceFilter(typeof(AuthFilter))]
 	// [ServiceFilter(typeof(AdminFilter))]
-	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
+	[ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
 	public async Task<IActionResult> Me(CancellationToken token)
 	{
 		// var jwt  = HttpContext.Items["user"]!.ToString();
